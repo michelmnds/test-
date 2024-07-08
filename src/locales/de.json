@@ -1,0 +1,39 @@
+{
+  "qrcode": {
+    "title": "Bitte scanne den QR-Code mit deiner Fliz-App, um zu zahlen. Installiere die App, falls du sie noch nicht hast.",
+    "subtitle": {
+      "one": "Empfänger:",
+      "two": "Betrag:"
+    },
+    "button": "Abbrechen"
+  },
+  "deepLink": {
+    "title": "Download!",
+    "subtitle": {
+      "one": "Du brauchst unsere App, um sichere Zahlungen direkt mit deinem Bankkonto zu machen.",
+      "two": "Nach der App-Registrierung:"
+    },
+    "button": {
+      "pay": "Zahlen mit FLIZpay",
+      "download": "Unsere App herunterzuladen"
+    }
+  },
+  "footer": {
+    "title": {
+      "one": "© 2024 Fliz Pay GmbH.",
+      "two": "Impressum",
+      "three": "Datenschutzerklärung",
+      "four": "AGBs"
+    }
+  },
+  "successPage": {
+    "title": "Zahlung erfolgreich",
+    "subtitle": {
+      "one": "Empfänger:",
+      "two": "Betrag:"
+    },
+    "button": "Schließen"
+  },
+  "expiredQRC": "QR-Code abgelaufen.",
+  "loadingText": "Eine Sekunde bitte 🙏"
+}

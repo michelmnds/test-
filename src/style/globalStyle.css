@@ -1,0 +1,73 @@
+:root {
+  /* COLORS */
+  --primary-color: #57cc99;
+  --secondary-color: #22577a;
+  --secondary-green: #80ed99;
+  --primary-grey: #adadad;
+  /* MIDNIGHT BLUE */
+  --midnight-blue-80: #7294aa;
+  --midnight-blue-60: #7a9aaf;
+  --midnight-blue-40: #a7bcca;
+  --midnight-blue-20: #d3dde4;
+  /* BLUE */
+  --blue-80: #16384e;
+  --blue-60: #143449;
+  --blue-40: #0e2331;
+  --blue-20: #071118;
+  /* GREEN */
+  --green-80: #79d6ad;
+  --green-60: #9ae0c2;
+  --green-40: #bcebd6;
+  --green-20: #ddf5eb;
+  /* MINT */
+  --pale-mint: #c7f9cc;
+  --mint-80: #d2fad6;
+  --mint-60: #ddfbe0;
+  --mint-40: #e9fdeb;
+  --mint-20: #f4fef5;
+  /* NEON */
+  --neon-80: #99f1ad;
+  --neon-60: #b3f4c2;
+  --neon-40: #ccf8d6;
+  --neon-20: #e6fbeb;
+  /* WHITE/BLACK */
+  --primary-white: #ffffff;
+  --primary-black: #000000;
+  /* STATUS */
+  --error: #ff9898;
+  --error-2: #ff6b6b;
+  --success: #c7f9cc;
+  /* FONT SIZE */
+  --font-headline-1: 44px;
+  --font-headline-2: 34px;
+  --font-headline-3: 24px;
+  --font-headline-4: 20px;
+  --font-subtitle-1: 16px;
+  --font-subtitle-2: 14px;
+  --font-subtitle-3: 12px;
+  --font-body: 18px;
+
+  /* BUTTONS */
+  --border-radius: 32px;
+  --width-default: 48px;
+  --width-one: 154px;
+  --width-two: 78px;
+  --height-default: 40px;
+  --padding-default: 0px 20px;
+}
+.globalBtn {
+  width: 100%;
+  max-width: 358px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0px;
+  background-color: var(--secondary-green);
+  border-radius: var(--border-radius);
+  color: var(--blue-40);
+  font-weight: bolder;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
