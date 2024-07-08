@@ -8,7 +8,7 @@ export const handleDeepLink = (reference, storeUrl, redirect = false) => {
 
   window.setTimeout(() => {
     window.location.href = storeUrl;
-  }, 25);
+  }, 500);
 
   window.setTimeout(() => {
     document.body.removeChild(iframe);
