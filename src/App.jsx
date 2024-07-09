@@ -6,7 +6,6 @@ import { QRC, DeepLink, Succeeded, Failed, Canceled } from './pages';
 import useDeviceType from './hooks/useDeviceType';
 import useQueryParams from './hooks/useQueryParams';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const App = () => {
   const deviceType = useDeviceType();
@@ -15,33 +14,27 @@ const App = () => {
   const companyName = useQueryParams('companyName');
   const tabletOrDesktop = deviceType === 'desktop' || deviceType === 'tablet';
   const redirectUrl = reference ? `/deeplink?reference=${reference}` : '/deeplink';
-  useEffect(() => {
-    localStorage.clear();
-    localStorage.setItem('reference', JSON.stringify(reference));
-  }, [reference]);
 
-  if (!deviceType) {
-    return <div>Loading...</div>;
+  if (deviceType) {
+    return (
+      <Router>
+        <Container>
+          <Routes>
+            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to={redirectUrl} />} />
+            <Route path="/qrc" element={<QRC reference={reference} amount={amount} companyName={companyName} />} />
+            <Route
+              path={'/deeplink'}
+              element={<DeepLink reference={reference} amount={amount} companyName={companyName} />}
+            />
+            <Route path="/succeeded" element={<Succeeded amount={amount} companyName={companyName} />} />
+            <Route path="/failed" element={<Failed />} />
+            <Route path="/canceled" element={<Canceled />} />
+          </Routes>
+          <Footer />
+        </Container>
+      </Router>
+    );
   }
-
-  return (
-    <Router>
-      <Container>
-        <Routes>
-          <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to={redirectUrl} />} />
-          <Route path="/qrc" element={<QRC reference={reference} amount={amount} companyName={companyName} />} />
-          <Route
-            path={'/deeplink'}
-            element={<DeepLink reference={reference} amount={amount} companyName={companyName} />}
-          />
-          <Route path="/succeeded" element={<Succeeded amount={amount} companyName={companyName} />} />
-          <Route path="/failed" element={<Failed />} />
-          <Route path="/canceled" element={<Canceled />} />
-        </Routes>
-        <Footer />
-      </Container>
-    </Router>
-  );
 };
 
 export default App;

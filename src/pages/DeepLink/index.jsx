@@ -8,8 +8,7 @@ import useUserLanguage from '../../hooks/useUserLanguage';
 import logo from '../../assets/logo/big-logo.svg';
 import { CircularProgress } from '@mui/material';
 
-export const DeepLink = () => {
-  const reference = JSON.parse(localStorage.getItem('reference'));
+export const DeepLink = ({ reference }) => {
   useWebSocket(reference);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
@@ -26,7 +25,7 @@ export const DeepLink = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-  }, []);
+  }, [reference]);
 
   if (isLoading) {
     return (

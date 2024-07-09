@@ -2,7 +2,7 @@ export const handleDeepLink = (reference, storeUrl) => {
   if (reference !== null) {
     const redirectTimeout = window.setTimeout(() => {
       window.location.href = storeUrl;
-    }, 2000);
+    }, 1500);
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
