@@ -23,7 +23,7 @@ export const QRC = ({ reference, companyName, amount }) => {
             <div style={styles.qrcImageContainer}>
               {timerIsOver && <span style={styles.expiredText}>{t('expiredQRC')}</span>}
               <QRCode
-                value={`http://192.168.1.187:5174/?reference=${reference}`}
+                value={`https://checkout-test-fliz.vercel.app/deeplink?reference=${reference}`}
                 size={236}
                 level={'H'}
                 style={timerIsOver ? styles.qrcImage : {}}

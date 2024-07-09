@@ -6,6 +6,7 @@ import { QRC, DeepLink, Succeeded, Failed, Canceled } from './pages';
 import useDeviceType from './hooks/useDeviceType';
 import useQueryParams from './hooks/useQueryParams';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const App = () => {
   const deviceType = useDeviceType();
@@ -13,7 +14,11 @@ const App = () => {
   const amount = useQueryParams('amount');
   const companyName = useQueryParams('companyName');
   const tabletOrDesktop = deviceType === 'desktop' || deviceType === 'tablet';
-  console.log('deviceType:', deviceType);
+
+  useEffect(() => {
+    localStorage.clear();
+    localStorage.setItem('reference', JSON.stringify(reference));
+  }, [reference]);
 
   if (!deviceType) {
     return <div>Loading...</div>;
@@ -23,10 +28,13 @@ const App = () => {
     <Router>
       <Container>
         <Routes>
-          <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to="/deeplink" />} />
+          <Route
+            path="/"
+            element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to={`/deeplink?reference=${reference}`} />}
+          />
           <Route path="/qrc" element={<QRC reference={reference} amount={amount} companyName={companyName} />} />
           <Route
-            path="/deeplink"
+            path={`/deeplink?reference=${reference}`}
             element={<DeepLink reference={reference} amount={amount} companyName={companyName} />}
           />
           <Route path="/succeeded" element={<Succeeded amount={amount} companyName={companyName} />} />

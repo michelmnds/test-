@@ -1,16 +1,29 @@
-export const handleDeepLink = (reference, storeUrl, redirect = false) => {
-  const appScheme = reference ? `flizpay://payment?reference=${reference}` : storeUrl;
+export const handleDeepLink = (reference, storeUrl) => {
+  if (reference) {
+    const redirectTimeout = window.setTimeout(() => {
+      window.location.href = storeUrl;
+    }, 2000);
 
-  var iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = appScheme;
-  document.body.appendChild(iframe);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        clearTimeout(redirectTimeout);
+        cleanupListeners();
+      }
+    };
 
-  window.setTimeout(() => {
+    const handleBlur = () => {
+      clearTimeout(redirectTimeout);
+      cleanupListeners();
+    };
+
+    const cleanupListeners = () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange, false);
+      window.removeEventListener('blur', handleBlur, false);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange, false);
+    window.addEventListener('blur', handleBlur, false);
+  } else {
     window.location.href = storeUrl;
-  }, 500);
-
-  window.setTimeout(() => {
-    document.body.removeChild(iframe);
-  }, 1000);
+  }
 };

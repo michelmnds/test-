@@ -8,7 +8,8 @@ import useUserLanguage from '../../hooks/useUserLanguage';
 import logo from '../../assets/logo/big-logo.svg';
 import { CircularProgress } from '@mui/material';
 
-export const DeepLink = ({ reference }) => {
+export const DeepLink = () => {
+  const reference = JSON.parse(localStorage.getItem('reference'));
   useWebSocket(reference);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ export const DeepLink = ({ reference }) => {
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
 
   if (isLoading) {
@@ -49,15 +50,19 @@ export const DeepLink = ({ reference }) => {
 
         <div style={styles.deepLinkBottomContainer}>
           <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.two')}</h2>
-          <span style={styles.deepLinkButton} className="globalBtn" onClick={() => (window.location.href = storeUrl)}>
-            {t('deepLink.button.download')}
-          </span>
-          <span
-            style={styles.deepLinkPaymentButton}
+          <a
+            onClick={e => {
+              e.preventDefault();
+              handleDeepLink(reference, storeUrl);
+            }}
+            style={styles.deepLinkButton}
             className="globalBtn"
-            onClick={() => handleDeepLink(reference, storeUrl, true)}>
+            href="#">
             {t('deepLink.button.pay')}
-          </span>
+          </a>
+          <a style={styles.deepLinkPaymentButton} className="globalBtn" href={storeUrl}>
+            {t('deepLink.button.download')}
+          </a>
         </div>
       </div>
     );
