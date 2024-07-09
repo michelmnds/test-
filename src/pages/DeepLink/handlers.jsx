@@ -1,5 +1,5 @@
 export const handleDeepLink = (reference, storeUrl) => {
-  if (reference) {
+  if (reference !== null) {
     const redirectTimeout = window.setTimeout(() => {
       window.location.href = storeUrl;
     }, 2000);
