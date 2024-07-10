@@ -1,8 +1,8 @@
 export const handleDeepLink = (reference, storeUrl) => {
-  if (reference !== null) {
+  if (reference) {
     const redirectTimeout = window.setTimeout(() => {
       window.location.href = storeUrl;
-    }, 1500);
+    }, 12000);
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
@@ -23,7 +23,7 @@ export const handleDeepLink = (reference, storeUrl) => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange, false);
     window.addEventListener('blur', handleBlur, false);
-  } else {
+  } else if (!reference) {
     window.location.href = storeUrl;
   }
 };

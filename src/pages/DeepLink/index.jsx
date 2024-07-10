@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { handleDeepLink } from './handlers';
-import { LanguageDisplay } from '../../components';
+import { LanguageDisplay, Timer } from '../../components';
 import useWebSocket from '../../hooks/useWebSocket';
 import usePhoneType from '../../hooks/usePhoneType';
 import useUserLanguage from '../../hooks/useUserLanguage';
@@ -11,10 +11,12 @@ import { CircularProgress } from '@mui/material';
 export const DeepLink = ({ reference }) => {
   useWebSocket(reference);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSetToRedirect, setIsSetToRedirect] = useState(false);
   const { t } = useTranslation();
   const userLang = useUserLanguage();
   const phoneType = usePhoneType();
   const isAndroid = phoneType === 'android';
+  const storeLabel = isAndroid ? 'Google Play Store' : 'App Store';
   const storeUrl = isAndroid
     ? `https://play.google.com/store/`
     : `https://apps.apple.com/${userLang}/app/fliz-pay/id6480379711`;
@@ -24,14 +26,34 @@ export const DeepLink = ({ reference }) => {
 
     setTimeout(() => {
       setIsLoading(false);
+      setIsSetToRedirect(true);
     }, 2000);
   }, [reference]);
+
+  useEffect(() => {
+    !isLoading &&
+      setTimeout(() => {
+        setIsSetToRedirect(false);
+      }, 12000);
+  }, [isLoading]);
 
   if (isLoading) {
     return (
       <div style={styles.loadingContainer}>
         <CircularProgress color="inherit" style={{ color: 'var(--blue-20)' }} />
         <span style={styles.loadingText}>{t('loadingText')}</span>
+      </div>
+    );
+  } else if (isSetToRedirect) {
+    return (
+      <div style={styles.loadingContainer}>
+        <span style={styles.loadingText}>
+          {t('redirectText.text.one')}
+          <span style={{ color: 'var(--primary-color)' }}>{storeLabel}</span>
+          {t('redirectText.text.two')}
+          <Timer mobileScreen />
+          {t('redirectText.text.three')}
+        </span>
       </div>
     );
   } else {
@@ -41,7 +63,6 @@ export const DeepLink = ({ reference }) => {
           <LanguageDisplay style={styles.deepLinkTopContainerTitle} />
           <img src={logo} alt="Fliz Pay Logo" />
         </div>
-
         <div style={styles.deepLinkMidContainer}>
           <h1 style={styles.deepLinkH1}>{t('deepLink.title')}</h1>
           <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.one')}</h2>
@@ -50,15 +71,12 @@ export const DeepLink = ({ reference }) => {
         <div style={styles.deepLinkBottomContainer}>
           <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.two')}</h2>
           <a
-            onClick={e => {
-              e.preventDefault();
-              handleDeepLink(reference, storeUrl);
-            }}
             style={styles.deepLinkButton}
             className="globalBtn"
-            href="#">
+            href={`http://192.168.1.187:5174/?reference=${reference}`}>
             {t('deepLink.button.pay')}
           </a>
+          <span style={styles.deepLinkSpan}>{t('deepLink.subtitle.three')}</span>
           <a style={styles.deepLinkPaymentButton} className="globalBtn" href={storeUrl}>
             {t('deepLink.button.download')}
           </a>
@@ -70,7 +88,6 @@ export const DeepLink = ({ reference }) => {
 
 const styles = {
   loadingContainer: {
-    padding: '10px 20px',
     width: '100%',
     minHeight: '100vh',
     display: 'flex',
@@ -83,7 +100,9 @@ const styles = {
   loadingText: {
     fontSize: 'var(--font-headline-3)',
     color: 'var(--blue-20)',
-    fontWeight: 'bolder'
+    fontWeight: 'bolder',
+    maxWidth: '90%',
+    textAlign: 'center'
   },
   deepLinkContainer: {
     padding: '10px 20px',
@@ -113,10 +132,10 @@ const styles = {
     letterSpacing: '1px'
   },
   deepLinkH1: {
-    fontSize: 'var(--font-headline-1)',
+    fontSize: 38,
     fontWeight: 'bolder',
     color: 'var(--mint-20)',
-    lineHeight: '1.6',
+    lineHeight: '1.3',
     letterSpacing: '1px'
   },
   deepLinkH2: {
@@ -132,6 +151,11 @@ const styles = {
     justifyContent: 'center',
     gap: '24px',
     width: '100%'
+  },
+  deepLinkSpan: {
+    fontSize: 'var(--font-subtitle-3)',
+    color: 'var(--mint-20)',
+    marginLeft: 5
   },
   deepLinkBottomContainer: {
     display: 'flex',

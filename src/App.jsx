@@ -13,14 +13,13 @@ const App = () => {
   const amount = useQueryParams('amount');
   const companyName = useQueryParams('companyName');
   const tabletOrDesktop = deviceType === 'desktop' || deviceType === 'tablet';
-  const redirectUrl = reference ? `/deeplink?reference=${reference}` : '/deeplink';
 
   if (deviceType) {
     return (
       <Router>
         <Container>
           <Routes>
-            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to={redirectUrl} />} />
+            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to="/deeplink" />} />
             <Route path="/qrc" element={<QRC reference={reference} amount={amount} companyName={companyName} />} />
             <Route
               path={'/deeplink'}

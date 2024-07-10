@@ -1,9 +1,9 @@
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import { LinearProgress } from '@mui/material';
+import { colors, LinearProgress } from '@mui/material';
 import { useTimer } from 'react-timer-hook';
 
-export const Timer = ({ setTimerIsOver }) => {
-  const totalMilliseconds = 900000;
+export const Timer = ({ setTimerIsOver, mobileScreen = false }) => {
+  const totalMilliseconds = mobileScreen ? 10000 : 900000;
   const expiryTimestamp = new Date();
   expiryTimestamp.setMilliseconds(expiryTimestamp.getMilliseconds() + totalMilliseconds);
 
@@ -15,17 +15,21 @@ export const Timer = ({ setTimerIsOver }) => {
   const timeElapsed = totalMilliseconds / 1000 - (minutes * 60 + seconds);
   const progressValue = (timeElapsed / (totalMilliseconds / 1000)) * 100;
 
-  return (
-    <div style={styles.timerContainer}>
-      <div style={styles.timer}>
-        <AccessAlarmIcon style={{ color: 'var(--blue-20)', width: 20 }} />
-        <span style={styles.timerText}>
-          {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-        </span>
+  if (mobileScreen) {
+    return <span style={styles.timerMobileText}>{seconds}</span>;
+  } else {
+    return (
+      <div style={styles.timerContainer}>
+        <div style={styles.timer}>
+          <AccessAlarmIcon style={{ color: 'var(--blue-20)', width: 20 }} />
+          <span style={styles.timerText}>
+            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+          </span>
+        </div>
+        <LinearProgress color="inherit" variant="determinate" value={progressValue} style={styles.timerBar} />
       </div>
-      <LinearProgress color="inherit" variant="determinate" value={progressValue} style={styles.timerBar} />
-    </div>
-  );
+    );
+  }
 };
 
 const styles = {
@@ -48,6 +52,9 @@ const styles = {
   },
   timerText: {
     marginTop: '2px'
+  },
+  timerMobileText: {
+    color: 'var(--primary-color)'
   },
   timerBar: {
     width: '100%',

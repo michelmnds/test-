@@ -8,10 +8,11 @@
     "button": "Abbrechen"
   },
   "deepLink": {
-    "title": "Download!",
+    "title": "Bezahlen Sie mit Fliz!",
     "subtitle": {
-      "one": "Du brauchst unsere App, um sichere Zahlungen direkt mit deinem Bankkonto zu machen.",
-      "two": "Nach der App-Registrierung:"
+      "one": "Mit unserer App können Sie sichere Zahlungen über Ihr Bankkonto tätigen.",
+      "two": "Nach der App-Registrierung:",
+      "three": "Oder wenn nicht"
     },
     "button": {
       "pay": "Zahlen mit FLIZpay",
@@ -35,5 +36,12 @@
     "button": "Schließen"
   },
   "expiredQRC": "QR-Code abgelaufen.",
-  "loadingText": "Eine Sekunde bitte 🙏"
+  "loadingText": "Eine Sekunde bitte 🙏",
+  "redirectText": {
+    "text": {
+      "one": "Um Ihre Zahlung abzuschließen, benötigen Sie unsere App. Sie werden zum weitergeleitet ",
+      "two": " in ",
+      "three": " Sekunden."
+    }
+  }
 }

@@ -8,10 +8,11 @@
     "button": "Cancel"
   },
   "deepLink": {
-    "title": "Download!",
+    "title": "Pay using Fliz!",
     "subtitle": {
-      "one": "You need our app to make secure payments using your bank account.",
-      "two": "Once registered, you can pay:"
+      "one": "With our app you can make secure payments using your bank account.",
+      "two": "Once registered, you can pay:",
+      "three": "Or, if you haven't"
     },
     "button": {
       "pay": "Pay with FLIZpay",
@@ -35,5 +36,12 @@
     "button": "Close"
   },
   "expiredQRC": "QR Code expired.",
-  "loadingText": "Give us a second 🙏"
+  "loadingText": "Give us a second 🙏",
+  "redirectText": {
+    "text": {
+      "one": "To complete your payment, our app is required. You'll be redirected to the ",
+      "two": " in ",
+      "three": " seconds."
+    }
+  }
 }
