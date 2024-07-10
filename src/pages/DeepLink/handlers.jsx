@@ -25,5 +25,6 @@ export const handleDeepLink = (reference, storeUrl) => {
     window.addEventListener('blur', handleBlur, false);
   } else if (!reference) {
     window.location.href = storeUrl;
+    window.close();
   }
 };
