@@ -73,7 +73,7 @@ export const DeepLink = ({ reference }) => {
           <a
             style={styles.deepLinkButton}
             className="globalBtn"
-            href={`http://192.168.1.187:5174/?reference=${reference}`}>
+            href={`https://checkout-test-fliz.vercel.app/?reference=${reference}`}>
             {t('deepLink.button.pay')}
           </a>
           <span style={styles.deepLinkSpan}>{t('deepLink.subtitle.three')}</span>
