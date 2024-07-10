@@ -20,7 +20,7 @@ const App = () => {
       <Router>
         <Container>
           <Routes>
-            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to={'/open-app'} />} />
+            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to={redirectUrl} />} />
             <Route path="/qrc" element={<QRC reference={reference} amount={amount} companyName={companyName} />} />
             <Route
               path={'/deeplink'}
