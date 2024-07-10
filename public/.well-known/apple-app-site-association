@@ -5,7 +5,7 @@
       {
         "appID": "3RP6AWKF36.org.reactjs.native.flizpay",
         "paths": [
-          "/deeplink*"
+          "/open-app"
         ]
       }
     ]
