@@ -1,30 +1,9 @@
-export const handleDeepLink = (reference, storeUrl) => {
-  if (reference) {
-    const redirectTimeout = window.setTimeout(() => {
-      window.location.href = storeUrl;
-    }, 12000);
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        clearTimeout(redirectTimeout);
-        cleanupListeners();
-      }
-    };
-
-    const handleBlur = () => {
-      clearTimeout(redirectTimeout);
-      cleanupListeners();
-    };
-
-    const cleanupListeners = () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange, false);
-      window.removeEventListener('blur', handleBlur, false);
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange, false);
-    window.addEventListener('blur', handleBlur, false);
-  } else if (!reference) {
-    window.location.href = storeUrl;
-    window.close();
+export const handleDeepLink = (reference, setHasDownloaded) => {
+  if (!reference) {
+    // window.location.href = storeUrl;
   }
+
+  window.addEventListener('blur', () => {
+    setHasDownloaded(true);
+  });
 };

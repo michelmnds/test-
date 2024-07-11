@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { MainContent, Timer } from '../../components';
 import useWebSocket from '../../hooks/useWebSocket';
 
-export const QRC = ({ reference, companyName, amount }) => {
+export const QRC = () => {
+  const { reference, amount, companyName } = JSON.parse(localStorage.getItem('transactionInformations'));
   const [timerIsOver, setTimerIsOver] = useState(false);
   useWebSocket(reference);
   const { t } = useTranslation();

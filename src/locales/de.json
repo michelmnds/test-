@@ -8,15 +8,14 @@
     "button": "Abbrechen"
   },
   "deepLink": {
-    "title": "Bezahlen Sie mit Fliz!",
+    "title": "Download!",
     "subtitle": {
-      "one": "Mit unserer App können Sie sichere Zahlungen über Ihr Bankkonto tätigen.",
-      "two": "Nach der App-Registrierung:",
-      "three": "Oder wenn nicht"
+      "one": "Du brauchst unsere App, um sichere Zahlungen direkt mit deinem Bankkonto zu machen.",
+      "two": "Nach der App-Registrierung:"
     },
     "button": {
       "pay": "Zahlen mit FLIZpay",
-      "download": "Unsere App herunterzuladen"
+      "download": "FLIZpay herunterladen"
     }
   },
   "footer": {

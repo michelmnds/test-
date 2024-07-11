@@ -1,89 +1,57 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { handleDeepLink } from './handlers';
 import { LanguageDisplay, Timer } from '../../components';
 import useWebSocket from '../../hooks/useWebSocket';
-import usePhoneType from '../../hooks/usePhoneType';
-import useUserLanguage from '../../hooks/useUserLanguage';
+import { storeUrl } from '../../constants';
 import logo from '../../assets/logo/big-logo.svg';
-import { CircularProgress } from '@mui/material';
 
-export const DeepLink = ({ reference }) => {
+export const DeepLink = () => {
+  const { reference } = JSON.parse(localStorage.getItem('transactionInformations'));
   useWebSocket(reference);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSetToRedirect, setIsSetToRedirect] = useState(false);
+  const [hasDonwloaded, setHasDownloaded] = useState(false);
   const { t } = useTranslation();
-  const userLang = useUserLanguage();
-  const phoneType = usePhoneType();
-  const isAndroid = phoneType === 'android';
-  const storeLabel = isAndroid ? 'Google Play Store' : 'App Store';
-  const storeUrl = isAndroid
-    ? `https://play.google.com/store/`
-    : `https://apps.apple.com/${userLang}/app/fliz-pay/id6480379711`;
 
   useEffect(() => {
-    handleDeepLink(reference, storeUrl);
+    if (!reference) {
+      window.location.href = storeUrl;
+    }
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSetToRedirect(true);
-    }, 2000);
+    window.addEventListener('blur', () => {
+      setHasDownloaded(true);
+    });
   }, [reference]);
 
-  useEffect(() => {
-    !isLoading &&
-      setTimeout(() => {
-        setIsSetToRedirect(false);
-      }, 12000);
-  }, [isLoading]);
-
-  if (isLoading) {
-    return (
-      <div style={styles.loadingContainer}>
-        <CircularProgress color="inherit" style={{ color: 'var(--blue-20)' }} />
-        <span style={styles.loadingText}>{t('loadingText')}</span>
+  return (
+    <div style={styles.deepLinkContainer}>
+      <div style={styles.deepLinkTopContainer}>
+        <LanguageDisplay style={styles.deepLinkTopContainerTitle} />
+        <img src={logo} alt="Fliz Pay Logo" />
       </div>
-    );
-  } else if (isSetToRedirect) {
-    return (
-      <div style={styles.loadingContainer}>
-        <span style={styles.loadingText}>
-          {t('redirectText.text.one')}
-          <span style={{ color: 'var(--primary-color)' }}>{storeLabel}</span>
-          {t('redirectText.text.two')}
-          <Timer mobileScreen />
-          {t('redirectText.text.three')}
-        </span>
+      <div style={styles.deepLinkMidContainer}>
+        <h1 style={styles.deepLinkH1}>{t('deepLink.title')}</h1>
+        <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.one')}</h2>
+        {!hasDonwloaded && (
+          <div style={styles.downloadButtonContainer}>
+            <a style={styles.deepLinkButton} className="globalBtn" href={storeUrl}>
+              {t('deepLink.button.download')}
+            </a>
+            <Timer mobileScreen callBack={() => (window.location.href = storeUrl)} />
+          </div>
+        )}
+        {hasDonwloaded && (
+          <>
+            <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.two')}</h2>
+            <a
+              style={styles.deepLinkButton}
+              className="globalBtn"
+              href={`https://checkout-test-fliz.vercel.app/?reference=${reference}`}>
+              {t('deepLink.button.pay')}
+            </a>
+          </>
+        )}
       </div>
-    );
-  } else {
-    return (
-      <div style={styles.deepLinkContainer}>
-        <div style={styles.deepLinkTopContainer}>
-          <LanguageDisplay style={styles.deepLinkTopContainerTitle} />
-          <img src={logo} alt="Fliz Pay Logo" />
-        </div>
-        <div style={styles.deepLinkMidContainer}>
-          <h1 style={styles.deepLinkH1}>{t('deepLink.title')}</h1>
-          <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.one')}</h2>
-        </div>
-
-        <div style={styles.deepLinkBottomContainer}>
-          <h2 style={styles.deepLinkH2}>{t('deepLink.subtitle.two')}</h2>
-          <a
-            style={styles.deepLinkButton}
-            className="globalBtn"
-            href={`https://checkout-test-fliz.vercel.app/?reference=${reference}`}>
-            {t('deepLink.button.pay')}
-          </a>
-          <span style={styles.deepLinkSpan}>{t('deepLink.subtitle.three')}</span>
-          <a style={styles.deepLinkPaymentButton} className="globalBtn" href={storeUrl}>
-            {t('deepLink.button.download')}
-          </a>
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 };
 
 const styles = {
@@ -132,7 +100,7 @@ const styles = {
     letterSpacing: '1px'
   },
   deepLinkH1: {
-    fontSize: 38,
+    fontSize: 'var(--font-headline-1)',
     fontWeight: 'bolder',
     color: 'var(--mint-20)',
     lineHeight: '1.3',
@@ -144,6 +112,14 @@ const styles = {
     lineHeight: '1.6',
     letterSpacing: '1px'
   },
+  downloadButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'start',
+    gap: '10px',
+    width: '100%'
+  },
   deepLinkMidContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -151,19 +127,6 @@ const styles = {
     justifyContent: 'center',
     gap: '24px',
     width: '100%'
-  },
-  deepLinkSpan: {
-    fontSize: 'var(--font-subtitle-3)',
-    color: 'var(--mint-20)',
-    marginLeft: 5
-  },
-  deepLinkBottomContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    alignItems: 'start',
-    justifyContent: 'center',
-    gap: '14px'
   },
   deepLinkButton: {
     padding: '18px 24px',

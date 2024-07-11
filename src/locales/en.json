@@ -8,15 +8,14 @@
     "button": "Cancel"
   },
   "deepLink": {
-    "title": "Pay using Fliz!",
+    "title": "Download!",
     "subtitle": {
-      "one": "With our app you can make secure payments using your bank account.",
-      "two": "Once registered, you can pay:",
-      "three": "Or, if you haven't"
+      "one": "You need our app to make secure payments using your bank account.",
+      "two": "Once registered, you can pay:"
     },
     "button": {
       "pay": "Pay with FLIZpay",
-      "download": "Download our App"
+      "download": "Download FLIZpay"
     }
   },
   "footer": {
