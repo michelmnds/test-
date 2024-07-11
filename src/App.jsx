@@ -22,7 +22,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem('transactionInformations', JSON.stringify(transactionInformations));
+    localStorage.clear();
+    reference && localStorage.setItem('transactionInformations', JSON.stringify(transactionInformations));
   }, [reference]);
 
   if (deviceType) {

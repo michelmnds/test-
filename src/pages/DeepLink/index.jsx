@@ -6,7 +6,7 @@ import { storeUrl } from '../../constants';
 import logo from '../../assets/logo/big-logo.svg';
 
 export const DeepLink = () => {
-  const { reference } = JSON.parse(localStorage.getItem('transactionInformations'));
+  const reference = JSON.parse(localStorage.getItem('transactionInformations'))?.reference;
   useWebSocket(reference);
   const [hasDonwloaded, setHasDownloaded] = useState(false);
   const { t } = useTranslation();

@@ -5,7 +5,10 @@ import { MainContent, Timer } from '../../components';
 import useWebSocket from '../../hooks/useWebSocket';
 
 export const QRC = () => {
-  const { reference, amount, companyName } = JSON.parse(localStorage.getItem('transactionInformations'));
+  const localStorageObject = JSON.parse(localStorage.getItem('transactionInformations'));
+  const reference = localStorageObject?.reference;
+  const amount = localStorageObject?.amount;
+  const companyName = localStorageObject?.companyName;
   const [timerIsOver, setTimerIsOver] = useState(false);
   useWebSocket(reference);
   const { t } = useTranslation();
