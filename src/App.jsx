@@ -2,13 +2,14 @@ import './style/globalStyle.css';
 import './style/reset.css';
 import './i18n';
 import { Footer, Container } from './components';
-import { QRC, DeepLink, Succeeded, Failed, Canceled } from './pages';
+import { QRC, Download, Succeeded, Failed, Canceled, Payment } from './pages';
 import useDeviceType from './hooks/useDeviceType';
 import useQueryParams from './hooks/useQueryParams';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const App = () => {
+  const download = useQueryParams('download');
   const reference = useQueryParams('reference');
   const amount = useQueryParams('amount');
   const companyName = useQueryParams('companyName');
@@ -22,7 +23,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    localStorage.clear();
     reference && localStorage.setItem('transactionInformations', JSON.stringify(transactionInformations));
   }, [reference]);
 
@@ -31,9 +31,10 @@ const App = () => {
       <Router>
         <Container>
           <Routes>
-            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to="/deeplink" />} />
+            <Route path="/" element={tabletOrDesktop ? <Navigate to="/qrc" /> : <Navigate to="/download" />} />
             <Route path="/qrc" element={<QRC />} />
-            <Route path={'/deeplink'} element={<DeepLink />} />
+            <Route path="/download" element={<Download download={download} />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="/succeeded" element={<Succeeded amount={amount} companyName={companyName} />} />
             <Route path="/failed" element={<Failed />} />
             <Route path="/canceled" element={<Canceled />} />

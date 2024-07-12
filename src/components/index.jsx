@@ -1,5 +1,6 @@
-export { Footer } from './Footer/index';
-export { Container } from './Container/index';
-export { LanguageDisplay } from './LanguageDisplay/index';
-export { MainContent } from './MainContent/index';
-export { Timer } from './Timer/index';
+export { Footer } from './Footer/';
+export { Container } from './Container/';
+export { LanguageDisplay } from './LanguageDisplay/';
+export { MainContent } from './MainContent/';
+export { Timer } from './Timer/';
+export { DownloadContainer } from './DownloadContainer/';

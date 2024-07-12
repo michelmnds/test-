@@ -7,16 +7,18 @@
     },
     "button": "Cancel"
   },
-  "deepLink": {
+  "downloadContainer": {
     "title": "Download!",
     "subtitle": {
-      "one": "You need our app to make secure payments using your bank account.",
-      "two": "Once registered, you can pay:"
-    },
-    "button": {
-      "pay": "Pay with FLIZpay",
-      "download": "Download FLIZpay"
+      "one": "You need our app to make secure payments using your bank account."
     }
+  },
+  "downloadPage": {
+    "button": "Download FLIZpay"
+  },
+  "paymentPage": {
+    "subtitle": "Once registered, you can pay:",
+    "button": "Pay with FLIZpay"
   },
   "footer": {
     "title": {
