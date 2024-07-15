@@ -10,8 +10,8 @@ export const QRC = () => {
   const amount = localStorageObject?.amount;
   const companyName = localStorageObject?.companyName;
   const [timerIsOver, setTimerIsOver] = useState(false);
-  useWebSocket(reference);
   const { t } = useTranslation();
+  useWebSocket(reference);
 
   return (
     <div style={styles.qrcContainer}>
@@ -27,7 +27,7 @@ export const QRC = () => {
             <div style={styles.qrcImageContainer}>
               {timerIsOver && <span style={styles.expiredText}>{t('expiredQRC')}</span>}
               <QRCode
-                value={`https://checkout-test-fliz.vercel.app/?reference=${reference}`}
+                value={`https://checkout.flizpay.de/?reference=${reference}`}
                 size={236}
                 level={'H'}
                 style={timerIsOver ? styles.qrcImage : {}}

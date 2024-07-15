@@ -7,20 +7,17 @@
     },
     "button": "Abbrechen"
   },
-  "downloadContainer": {
+  "deepLink": {
     "title": "Download!",
     "subtitle": {
-      "one": "Du brauchst unsere App, um sichere Zahlungen direkt mit deinem Bankkonto zu machen."
+      "one": "Du brauchst unsere App, um sichere Zahlungen direkt mit deinem Bankkonto zu machen.",
+      "two": "Nach der App-Registrierung:"
+    },
+    "button": {
+      "pay": "Mit FLIZpay zahlen",
+      "download": "FLIZpay downloaden"
     }
   },
-  "downloadPage": {
-    "button": "FLIZpay herunterladen"
-  },
-  "paymentPage": {
-    "subtitle": "Nach der App-Registrierung:",
-    "button": "Zahlen mit FLIZpay"
-  },
-
   "footer": {
     "title": {
       "one": "© 2024 Fliz Pay GmbH.",
