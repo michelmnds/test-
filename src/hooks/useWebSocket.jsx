@@ -53,8 +53,7 @@ const useWebSocket = reference => {
     if (!reference || retryCount >= maxRetries) return;
 
     console.log('Attempting to connect WebSocket', reference);
-    // ws.current = new WebSocket(`wss://api.flizpay.de/ws?reference=${reference}`);
-    ws.current = new WebSocket(`ws://192.168.1.187:8080/ws?reference=${reference}`);
+    ws.current = new WebSocket(`wss://api.flizpay.de/ws?reference=${reference}`);
     ws.current.onopen = handleOpen;
     ws.current.onmessage = handleMessage;
     ws.current.onerror = handleError;
