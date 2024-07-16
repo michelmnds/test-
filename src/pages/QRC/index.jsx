@@ -27,7 +27,7 @@ export const QRC = () => {
             <div style={styles.qrcImageContainer}>
               {timerIsOver && <span style={styles.expiredText}>{t('expiredQRC')}</span>}
               <QRCode
-                value={`https://checkout.flizpay.de/?reference=${reference}`}
+                value={`https://checkout.flizpay.de?reference=${reference}`}
                 size={236}
                 level={'H'}
                 style={timerIsOver ? styles.qrcImage : {}}

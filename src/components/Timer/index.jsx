@@ -1,5 +1,5 @@
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import { CircularProgress, colors, LinearProgress } from '@mui/material';
+import { CircularProgress, LinearProgress } from '@mui/material';
 import { useTimer } from 'react-timer-hook';
 
 export const Timer = ({ setTimerIsOver, mobileScreen = false, callBack }) => {
@@ -66,7 +66,12 @@ const styles = {
     padding: '2px 0',
     color: 'var(--secondary-green)'
   },
-  circularTimerContainer: { display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' },
+  circularTimerContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative'
+  },
   circularTimer: {
     marginTop: 2,
     width: 47,

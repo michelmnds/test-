@@ -5,7 +5,7 @@ import de from './locales/de.json';
 import useUserLanguage from './hooks/useUserLanguage';
 
 const resources = {
-  us: { translation: en },
+  en: { translation: en },
   de: { translation: de }
 };
 
@@ -19,7 +19,7 @@ export const loadLocale = async () => {
     compatibilityJSON: 'v3',
     resources,
     lng: userLang,
-    fallbackLng: 'us',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false
     }
@@ -27,16 +27,16 @@ export const loadLocale = async () => {
 };
 
 export const changeLanguage = async event => {
-  const de = event.target.innerHTML === 'German';
-  const en = event.target.innerHTML === 'Englisch';
+  const de = event.target.innerHTML === 'Deutsch';
+  const en = event.target.innerHTML === 'English';
 
   try {
     if (de) {
       localStorage.setItem('@language', 'de');
       await i18n.changeLanguage('de');
     } else if (en) {
-      localStorage.setItem('@language', 'us');
-      await i18n.changeLanguage('us');
+      localStorage.setItem('@language', 'en');
+      await i18n.changeLanguage('en');
     }
   } catch (error) {
     console.error('Failed to save the language setting', error);

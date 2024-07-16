@@ -5,7 +5,7 @@ import useWebSocket from '../../hooks/useWebSocket';
 import { storeUrl } from '../../constants';
 import logo from '../../assets/logo/big-logo.svg';
 
-export const Deeplink = ({ download }) => {
+export const DeepLink = ({ download }) => {
   const reference = JSON.parse(localStorage.getItem('transactionInformations'))?.reference;
   useWebSocket(reference);
   const [hasDonwloaded, setHasDownloaded] = useState(false);
@@ -52,23 +52,6 @@ export const Deeplink = ({ download }) => {
 };
 
 const styles = {
-  loadingContainer: {
-    width: '100%',
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '20px',
-    backgroundColor: 'var(--mint-20)'
-  },
-  loadingText: {
-    fontSize: 'var(--font-headline-3)',
-    color: 'var(--blue-20)',
-    fontWeight: 'bolder',
-    maxWidth: '90%',
-    textAlign: 'center'
-  },
   deepLinkContainer: {
     padding: '10px 20px',
     minHeight: '100vh',

@@ -1,6 +1,6 @@
 {
   "qrcode": {
-    "title": "Please scan the QR-Code with your Fliz app to pay. If you don't have the app yet, you can download it now.",
+    "title": "Please scan the QR-Code with your FLIZ app to pay, or scan the QR-Code with your phone's camera to download the app.",
     "subtitle": {
       "one": "Recipient:",
       "two": "Amount:"
@@ -34,13 +34,5 @@
     },
     "button": "Close"
   },
-  "expiredQRC": "QR Code expired.",
-  "loadingText": "Give us a second 🙏",
-  "redirectText": {
-    "text": {
-      "one": "To complete your payment, our app is required. You'll be redirected to the ",
-      "two": " in ",
-      "three": " seconds."
-    }
-  }
+  "expiredQRC": "QR Code expired."
 }
