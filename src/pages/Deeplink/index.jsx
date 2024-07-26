@@ -12,9 +12,7 @@ export const DeepLink = ({ download }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (download) {
-      window.location.href = storeUrl;
-    }
+    if (download) window.location.href = storeUrl;
 
     window.addEventListener('blur', () => {
       setHasDownloaded(true);
