@@ -53,6 +53,8 @@ const useWebSocket = reference => {
     if (!reference || retryCount >= maxRetries) return;
 
     console.log('Attempting to connect WebSocket', reference);
+    const wsBaseUrl = import.meta.env.VITE_WS_BASE_URL || 'wss://api.flizpay.de';
+    ws.current = new WebSocket(`${wsBaseUrl}/ws?reference=${reference}`);
     ws.current = new WebSocket(`wss://api.flizpay.de/ws?reference=${reference}`);
     ws.current.onopen = handleOpen;
     ws.current.onmessage = handleMessage;
