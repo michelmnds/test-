@@ -7,6 +7,7 @@ import useDeviceType from './hooks/useDeviceType';
 import useQueryParams from './hooks/useQueryParams';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { storeUrl } from './constants';
 
 const App = () => {
   const download = useQueryParams('download');
@@ -22,8 +23,10 @@ const App = () => {
   };
 
   useEffect(() => {
+    if (download) window.location.href = storeUrl;
+
     reference && localStorage.setItem('transactionInformations', JSON.stringify(transactionInformations));
-  }, [reference]);
+  }, [download, reference]);
 
   if (deviceType) {
     return (
